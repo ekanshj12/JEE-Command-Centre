@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ekansh's JEE Command Center</title>
+    <style>
+        /* 1. The Background: Dark and Sleek */
+        body {
+            background-color: #0f172a; 
+            color: #e2e8f0;            
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+        }
+
+        /* 2. The Card: Glass-morphism effect */
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 400px; 
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            color: yellow;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* 3. Input Group for Centering */
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers everything inside */
+            gap: 5px;
+        }
+
+        /* 4. The Dropdown: Compact and Modern */
+        select#chapterName {
+            width: 85%; /* Reduced size */
+            padding: 10px 12px;
+            font-size: 0.9rem;
+            color: #ffffff;
+            background-color: #2d2d2d;
+            border: 1px solid #444;
+            border-radius: 8px;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        input {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            width: 75%; /* Aligned size */
+            text-align: center;
+        }
+/* Styling the Slider */
+.slider-container {
+    width: 250px; /* Matching your input width */
+    margin: 10px 0;
+    text-align: left;
+}
+
+input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+    accent-color: #38bdf8; /* Makes the slider blue */
+}
+
+#confVal {
+    font-weight: bold;
+    color: #38bdf8;
+}
+
+        button {
+            background: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            box-shadow: 0 0 15px #38bdf8;
+            transform: scale(1.05);
+        }
+
+        /* 5. The Animations */
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 5px #ff0055; border-color: #ff0055; }
+            50% { box-shadow: 0 0 25px #ff0055; border-color: #ff0055; }
+            100% { box-shadow: 0 0 5px #ff0055; border-color: #ff0055; }
+        }
+
+        .critical-glow {
+            animation: pulse-red 1.5s infinite;
+        }
+
+        optgroup { background-color: #1a1a1a; color: #00f2ff; }
+        option { background-color: #2d2d2d; color: #ffffff; }
+
+        #resultDisplay {
+            margin-top: 25px;
+            width: 100%;
+        }
+/* Digital Countdown Styling */
+#countdown-timer {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    margin-bottom: 25px;
+    font-family: 'Courier New', Courier, monospace; /* Digital feel */
+}
+
+.timer-label {
+    font-size: 0.7rem;
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.timer-digits {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+.timer-unit {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-right: 8px;
+}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="countdown-timer">
+            <span class="timer-label">Mission: NTU 2027</span>
+            <div class="timer-digits" id="timer">
+                00<span class="timer-unit">d</span> 00<span class="timer-unit">h</span> 00<span class="timer-unit">m</span> 00<span class="timer-unit">s</span>
+            </div>
+        </div>
+
+        <h1>Ekansh's Command Center</h1>
+        <p style="color: #94a3b8; margin-bottom: 25px; font-size: 0.9rem;">Target: JEE January 2027</p>
+
+        <div class="input-section">
+            <label style="font-size: 0.7rem; color: #38bdf8; letter-spacing: 1px;">CHAPTER SELECT</label>
+            <select id="chapterName">
+                <optgroup label="PHYSICS">
+                    <option value="Electrostatics" data-weight="9">Electrostatics</option>
+                    <option value="Current Electricity" data-weight="8">Current Electricity</option>
+                    <option value="Magnetism" data-weight="8">Magnetism</option>
+                    <option value="EMI & AC" data-weight="8">EMI & AC</option>
+                    <option value="EM Waves" data-weight="5">EM Waves</option>
+                    <option value="Ray Optics" data-weight="6">Ray Optics</option>
+                    <option value="Wave Optics" data-weight="4">Wave Optics</option>
+                    <option value="Dual Nature" data-weight="6">Dual Nature</option>
+                    <option value="Atoms & Nuclei" data-weight="6">Atoms & Nuclei</option>
+                    <option value="Semiconductors" data-weight="6">Semiconductors</option>
+                </optgroup>
+                <optgroup label="CHEMISTRY">
+                    <option value="Solutions" data-weight="5">Solutions</option>
+                    <option value="Electrochemistry" data-weight="4">Electrochemistry</option>
+                    <option value="Kinetics" data-weight="3">Chemical Kinetics</option>
+                    <option value="d & f Block" data-weight="4">d & f Block</option>
+                    <option value="Coordination" data-weight="9">Coordination Compounds</option>
+                    <option value="Organic" data-weight="15">Organic Chemistry (Full)</option>
+                    <option value="Biomolecules" data-weight="3">Biomolecules</option>
+                </optgroup>
+                <optgroup label="MATHEMATICS">
+                    <option value="Relations" data-weight="5">Relations & Functions</option>
+                    <option value="Matrices" data-weight="7">Matrices & Determinants</option>
+                    <option value="LCD" data-weight="7">Limits & Continuity</option>
+                    <option value="AOD" data-weight="7">App of Derivatives</option>
+                    <option value="Integrals" data-weight="9">Integrals</option>
+                    <option value="Diff Equations" data-weight="5">Diff Equations</option>
+                    <option value="Vectors" data-weight="7">Vector Algebra</option>
+                    <option value="3D Geometry" data-weight="9">3D Geometry</option>
+                    <option value="Probability" data-weight="7">Probability</option>
+                </optgroup>
+            </select>
+
+            <div class="slider-container">
+                <label style="font-size: 0.8rem;">Confidence: <span id="confVal">50</span>%</label>
+                <input type="range" id="confidence" min="0" max="100" value="50" oninput="updateVal(this.value)">
+            </div>
+
+            <div style="display: flex; gap: 10px; width: 85%;">
+                <input type="number" id="daysSince" placeholder="Days since last study" style="flex: 1;">
+                <input type="number" id="clearWindow" placeholder="Days to clear" style="flex: 1;">
+            </div>
+            
+            <button onclick="calculateRisk()">ANALYZE DEBT</button>
+        </div>
+
+        <div id="resultDisplay"></div>
+    </div>
+
+    <script>
+        function updateVal(val) {
+            document.getElementById('confVal').innerText = val;
+        }
+
+        const targetDate = new Date("Jan 1, 2027 00:00:00").getTime();
+
+        const updateTimer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML = 
+                days + "<span class='timer-unit'>d</span> " + 
+                hours + "<span class='timer-unit'>h</span> " + 
+                minutes + "<span class='timer-unit'>m</span> " + 
+                seconds + "<span class='timer-unit'>s</span>";
+
+            if (distance < 0) {
+                clearInterval(updateTimer);
+                document.getElementById("timer").innerHTML = "EXAM COMMENCED";
+            }
+        }, 1000);
+
+        window.onload = function() {
+            const saved = localStorage.getItem('lastAnalysis');
+            if (saved) {
+                document.getElementById('resultDisplay').innerHTML = saved;
+            }
+        }
+
+        function calculateRisk() {
+            const chapterSelect = document.getElementById('chapterName');
+            const selectedOption = chapterSelect.options[chapterSelect.selectedIndex];
+            const display = document.getElementById('resultDisplay');
+            
+            const chapterName = selectedOption.text;
+            const weight = parseFloat(selectedOption.getAttribute('data-weight'));
+            const confidence = parseInt(document.getElementById('confidence').value);
+            const daysSince = parseInt(document.getElementById('daysSince').value) || 0;
+            const clearWindow = parseInt(document.getElementById('clearWindow').value) || 7;
+
+            // --- AI ESTIMATE LOGIC ---
+            const baseHours = weight > 7 ? 25 : 15;
+            const confidenceGap = (100 - confidence) / 100;
+            const decayFactor = 1 + (daysSince * 0.02); 
+            const totalHours = (baseHours * confidenceGap * decayFactor);
+            const dailyQuota = (totalHours / clearWindow).toFixed(1);
+            
+            const priorityScore = ((100 - confidence) * weight) + (daysSince * 5);
+
+            let status, color, advice;
+            display.className = ""; 
+
+            if (priorityScore > 700) {
+                status = "CRITICAL DEBT";
+                color = "#ff0055";
+                advice = "Intensive focus required for NTU standards.";
+                display.classList.add('critical-glow');
+            } else if (priorityScore > 400) {
+                status = "MODERATE RISK";
+                color = "#ffaa00";
+                advice = "Consistent effort will clear this soon.";
+            } else {
+                status = "SECURE";
+                color = "#00f2ff";
+                advice = "Maintain status with advanced PYQs.";
+            }
+
+            const resultHTML = `
+                <div style="border: 2px solid ${color}; padding: 15px; border-radius: 12px; background: rgba(0,0,0,0.4); margin-top: 20px;">
+                    <h2 style="color: ${color}; margin: 0; font-size: 1.1rem;">${status}</h2>
+                    <p style="font-size: 0.8rem; color: #94a3b8; margin: 5px 0;">${chapterName}</p>
+                    
+                    <div style="display: flex; gap: 10px; margin: 15px 0;">
+                        <div style="flex: 1; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px; text-align: center;">
+                            <span style="display:block; font-size: 0.6rem; color: #38bdf8; letter-spacing: 1px;">TOTAL DEBT</span>
+                            <span style="font-size: 1.4rem; font-weight: bold;">${totalHours.toFixed(1)}<span style="font-size: 0.8rem; color: #94a3b8;">h</span></span>
+                        </div>
+                        <div style="flex: 1; padding: 10px; background: rgba(251, 191, 36, 0.1); border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.3); text-align: center;">
+                            <span style="display:block; font-size: 0.6rem; color: #fbbf24; letter-spacing: 1px;">DAILY QUOTA</span>
+                            <span style="font-size: 1.4rem; font-weight: bold; color: #fbbf24;">${dailyQuota}<span style="font-size: 0.8rem; color: #94a3b8;">h/d</span></span>
+                        </div>
+                    </div>
+
+                    <p style="color: #eee; font-style: italic; font-size: 0.85rem; text-align: center;">"${advice}"</p>
+                    <p style="font-size: 0.6rem; color: #475569; margin-top: 10px; text-align: center;">Target: ${clearWindow} Days | Priority Index: ${priorityScore.toFixed(0)}</p>
+                </div>
+            `;
+
+            display.innerHTML = resultHTML;
+            localStorage.setItem('lastAnalysis', resultHTML);
+        }
+    </script>
+</body>
+</html>
